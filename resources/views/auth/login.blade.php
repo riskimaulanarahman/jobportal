@@ -183,25 +183,25 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="nik" class="form-label">NIK</label>
-                                        <input type="text" class="form-control" id="nik" name="nik">
+                                        <input type="text" class="form-control" id="nik" name="nik" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="first_name" class="form-label">First Name</label>
-                                        <input type="text" class="form-control" id="first_name" name="first_name">
+                                        <input type="text" class="form-control" id="first_name" name="first_name" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="last_name" class="form-label">Last Name</label>
-                                        <input type="text" class="form-control" id="last_name" name="last_name">
+                                        <input type="text" class="form-control" id="last_name" name="last_name" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="known_as" class="form-label">Known As</label>
-                                        <input type="text" class="form-control" id="known_as" name="known_as">
+                                        <input type="text" class="form-control" id="known_as" name="known_as" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="gender" class="form-label">Gender</label>
-                                        <select class="form-control" id="gender" name="gender">
+                                        <select class="form-control" id="gender" name="gender" required>
                                             <option value="">- Select -</option>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
@@ -209,15 +209,15 @@
                                     </div>
                                     <div class="mb-3">
                                         <label for="date_of_birth" class="form-label">Date of Birth</label>
-                                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth">
+                                        <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="place_of_birth" class="form-label">Place of Birth</label>
-                                        <input type="text" class="form-control" id="place_of_birth" name="place_of_birth">
+                                        <input type="text" class="form-control" id="place_of_birth" name="place_of_birth" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="country_of_birth" class="form-label">Country of Birth</label>
-                                        <select class="form-control" id="country_of_birth" name="country_of_birth">
+                                        <select class="form-control" id="country_of_birth" name="country_of_birth" required>
                                             <option value="Indonesia" selected>Indonesia</option>
                                             <option value="United States">United States</option>
                                             <option value="United Kingdom">United Kingdom</option>
@@ -245,7 +245,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="marital_status" class="form-label">Status</label>
-                                        <select class="form-control" id="marital_status" name="marital_status">
+                                        <select class="form-control" id="marital_status" name="marital_status" required>
                                             <option value="">- Select -</option>
                                             <option value="single">Single</option>
                                             <option value="married">Married</option>
@@ -270,13 +270,13 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email">
+                                        <input type="email" class="form-control" id="email" name="email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="whatsapp_number" class="form-label">WhatsApp Number</label>
-                                        <input type="tel" class="form-control" id="whatsapp_number" name="whatsapp_number">
+                                        <input type="tel" class="form-control" id="whatsapp_number" name="whatsapp_number" required>
                                     </div>
                                 </div>
                             </div>
@@ -289,13 +289,13 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username">
+                                        <input type="text" class="form-control" id="username" name="username" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password">
+                                        <input type="password" class="form-control" id="password" name="password" required>
                                     </div>
                                 </div>
                             </div>

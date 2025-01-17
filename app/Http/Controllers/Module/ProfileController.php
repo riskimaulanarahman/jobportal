@@ -44,7 +44,7 @@ class ProfileController extends Controller
             $personalInfo = PersonalData::findOrFail($id);
             // Validate the request data
             $validator = Validator::make($request->all(), [
-                'nik' => 'required|string|max:12',
+                'nik' => 'required|string|min:16',
                 'title' => 'nullable|string|max:5',
                 'first_name' => 'required|string|max:50',
                 'last_name' => 'required|string|max:50',
