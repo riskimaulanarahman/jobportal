@@ -103,7 +103,7 @@
                                             
                                             <div class="card-body text-center">
                                                 @if(!empty($personalInfo->profile_photo))
-                                                <img src="{{ asset('storage/'.$personalInfo->profile_photo) }}" alt="Profile Photo"
+                                                <img src="{{ asset('upload/'.$personalInfo->profile_photo) }}" alt="Profile Photo"
                                                      class="rounded" style="width: 50%; height: auto; object-fit: cover; border: 2px solid #ccc;">
                                                 @else
                                                 <img src="{{ asset('upload/profile/unnamed.jpg') }}" alt="Profile Photo"
@@ -967,7 +967,7 @@
                                 <!-- Pratinjau foto jika sudah ada -->
                                 @if(!empty($personalInfo->profile_photo))
                                     <div class="mb-2">
-                                        <img src="{{ asset('storage/' . $personalInfo->profile_photo) }}" alt="Profile Photo" class="img-thumbnail" style="max-width: 150px;">
+                                        <img src="{{ asset('upload/' . $personalInfo->profile_photo) }}" alt="Profile Photo" class="img-thumbnail" style="max-width: 150px;">
                                     </div>
                                 @endif
 

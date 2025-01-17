@@ -40,12 +40,13 @@
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item user" id="page-header-user-dropdown-v" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="display: flex; align-items: center;">
                     <p class="font-size-11 text-muted" style="margin: 0;">{{ Auth::user()->fullname }}</p>
-                    <img class="rounded-circle header-profile-user" src="@if (Auth::user()->avatar != '') 
+                    {{-- <img class="rounded-circle header-profile-user" src="@if (Auth::user()->avatar != '') 
                                                     {{ env('APP_URL') . '/public/upload/profile/' . Auth::user()->avatar }} 
                                                 @else 
                                                     {{ asset('upload/profile/unnamed.jpg') }} 
                                                 @endif" 
-                         alt="Header Avatar" style="margin-left: 10px;"> <!-- Adding some right margin -->
+                         alt="Header Avatar" style="margin-left: 10px;">  --}}
+                         <!-- Adding some right margin -->
                     
                 </button>
                 <div class="dropdown-menu dropdown-menu-end pt-0">

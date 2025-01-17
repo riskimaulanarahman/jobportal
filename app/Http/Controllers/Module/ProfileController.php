@@ -79,7 +79,7 @@ class ProfileController extends Controller
             // Check if a profile photo was uploaded
             if ($request->hasFile('profile_photo')) {
                 // Store the file and get the path
-                $filePath = $request->file('profile_photo')->store('profile_photos', 'public');
+                $filePath = $request->file('profile_photo')->store('profile', 'public');
     
                 // Update the profile photo URL field
                 $validatedData['profile_photo'] = $filePath;
