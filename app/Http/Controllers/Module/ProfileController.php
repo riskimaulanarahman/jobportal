@@ -13,6 +13,17 @@ use App\Models\PersonalData;
 use App\Models\SocialMedia;
 use App\Models\Size;
 use App\Models\Family;
+use App\Models\Address;
+use App\Models\Communication;
+use App\Models\Reference;
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\Language;
+use App\Models\Skill;
+use App\Models\Bank;
+use App\Models\Tax;
+use App\Models\Document;
+use App\Models\Reference\TypeDocument;
 
 class ProfileController extends Controller
 {
@@ -28,12 +39,37 @@ class ProfileController extends Controller
         $socialMedia = SocialMedia::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
         $size = Size::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
         $family = Family::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $address = Address::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $communication = Communication::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $reference = Reference::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $education = Education::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $experience = Experience::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $language = Language::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $skill = Skill::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $bank = Bank::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $tax = Tax::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+        $document = Document::where('personal_data_id',$personalInfo->id)->get(); // This assumes you want the first record
+
+        // dd($document);
+
+        $refTypeDocuments = TypeDocument::select('name','id')->get();
         
         return view('area.my-profile', compact([
             'personalInfo',
             'socialMedia',
             'size',
             'family',
+            'address',
+            'communication',
+            'reference',
+            'education',
+            'experience',
+            'language',
+            'skill',
+            'bank',
+            'tax',
+            'document',
+            'refTypeDocuments',
         ]));
     }
 

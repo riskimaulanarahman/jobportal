@@ -22,7 +22,7 @@ class SizeController extends Controller
             $validator = Validator::make($request->all(), [
                 'height' => 'required|integer',
                 'weight' => 'required|integer',
-                'clothing_size' => 'required|integer',
+                'clothing_size' => 'required|string',
                 'pants_size' => 'required|integer',
                 'shoe_size' => 'required|integer',
             ]);
@@ -42,9 +42,6 @@ class SizeController extends Controller
             if ($existingData) {
                 return response()->json(['error' => 'Data is already exists. You can only add one row of data!']);
             }
-
-            // Ambil platform dari input
-            $platform = strtolower($request->platform);
 
             // Gabungkan personal_data_id ke dalam data yang dikirim
             $data = $request->all();
@@ -67,7 +64,7 @@ class SizeController extends Controller
             $validator = Validator::make($request->all(), [
                 'height' => 'required|integer',
                 'weight' => 'required|integer',
-                'clothing_size' => 'required|integer',
+                'clothing_size' => 'required|string',
                 'pants_size' => 'required|integer',
                 'shoe_size' => 'required|integer',
             ]);

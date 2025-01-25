@@ -24,7 +24,12 @@
                             <div class="d-flex justify-content-between mb-3">
                                 <!-- Dropdown for Job Categories -->
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <!-- Mobile button -->
+                                    <button class="btn btn-sm btn-secondary dropdown-toggle d-lg-none" type="button" id="categoryDropdown1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Select Job Categories
+                                    </button>
+                                    <!-- Desktop button -->
+                                    <button class="btn btn-lg btn-secondary dropdown-toggle d-none d-lg-inline-block" type="button" id="categoryDropdown1Desktop" data-bs-toggle="dropdown" aria-expanded="false">
                                         Select Job Categories
                                     </button>
                                     <ul class="dropdown-menu p-3" aria-labelledby="categoryDropdown1">
@@ -40,10 +45,15 @@
                                         @endforeach
                                     </ul>
                                 </div>
-                        
+                            
                                 <!-- Dropdown for Job Locations -->
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="locationDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <!-- Mobile button -->
+                                    <button class="btn btn-sm btn-secondary dropdown-toggle d-lg-none" type="button" id="locationDropdown2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Select Job Locations
+                                    </button>
+                                    <!-- Desktop button -->
+                                    <button class="btn btn-lg btn-secondary dropdown-toggle d-none d-lg-inline-block" type="button" id="locationDropdown2Desktop" data-bs-toggle="dropdown" aria-expanded="false">
                                         Select Job Locations
                                     </button>
                                     <ul class="dropdown-menu p-3" aria-labelledby="locationDropdown2">

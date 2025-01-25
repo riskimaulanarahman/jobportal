@@ -6,27 +6,30 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\Family;
+use App\Models\Tax;
 
-class FamilyController extends Controller
+class TaxController extends Controller
 {
     public function __construct()
     {
-        $this->namemodel = 'Family';
-        $this->model = new Family();
+        $this->namemodel = 'Tax';
+        $this->model = new Tax();
     }
 
     public function store(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
-                'members' => 'required|string|max:255', // Misalnya jumlah anggota harus angka positif
-                'name' => 'required|string|max:255', // Nama biasanya string
-                'gender' => 'required|in:M,F', // Gender bisa jadi opsi tertentu
-                'birth_place' => 'required|string|max:255', // Tempat lahir biasanya string
-                'date_of_birth' => 'required|date', // Tanggal lahir harus format tanggal
-                'country_of_birth' => 'required|string|max:255', // Negara tempat lahir string
-                'nationality' => 'required|string|max:255', // Kewarganegaraan string
+                'npwp' => 'required|string|max:15', // NPWP maksimal 15 karakter
+                'registered_date' => 'nullable|date', // Tanggal harus dalam format yang valid
+                'npwp_address' => 'required|string|max:255', // Alamat maksimal 255 karakter
+                'married_for_tax_purpose' => 'required|in:Yes,No', // Harus bernilai Yes atau No
+                'spouse_benefit' => 'required|in:Yes,No', // Harus bernilai Yes atau No
+                'number_of_dependents' => 'required|integer|min:0|max:10', // Minimal 0, maksimal 10 dependents
+                'jamsostek_id' => 'nullable|string|max:20', // Jamsostek ID maksimal 20 karakter
+                'bpjs_id' => 'required|string|max:20', // BPJS ID maksimal 20 karakter
+                'benefit_class' => 'required|integer|min:0|max:3', // Kelas manfaat harus antara 0-3
+                'dependents_count' => 'required|string|in:Use Family Info', // Harus bernilai "Use Family Info"
             ]);
             
             if ($validator->fails()) {
@@ -38,11 +41,13 @@ class FamilyController extends Controller
             // Ambil nilai personal_data_id dari metode
             $personalDataId = $this->getPersonaldataByid();
 
+            $param1 = $request->bank_name;
+
             // Cek apakah sudah ada data dengan personal_data_id yang sama
-            $existingData = $this->model->where('personal_data_id', $personalDataId)->where('members',$request->members)->first();
+            $existingData = $this->model->where('personal_data_id', $personalDataId)->first();
 
             if ($existingData) {
-                return response()->json(['error' => 'Data '.$request->members.' already exists. You can only add one row of data!']);
+                return response()->json(['error' => 'Data is already exists. You can only add one row of data!']);
             }
 
             // Gabungkan personal_data_id ke dalam data yang dikirim
@@ -64,13 +69,16 @@ class FamilyController extends Controller
         try {
 
             $validator = Validator::make($request->all(), [
-                'members' => 'required|string|max:255', // Misalnya jumlah anggota harus angka positif
-                'name' => 'required|string|max:255', // Nama biasanya string
-                'gender' => 'required|in:M,F', // Gender bisa jadi opsi tertentu
-                'birth_place' => 'required|string|max:255', // Tempat lahir biasanya string
-                'date_of_birth' => 'required|date', // Tanggal lahir harus format tanggal
-                'country_of_birth' => 'required|string|max:255', // Negara tempat lahir string
-                'nationality' => 'required|string|max:255', // Kewarganegaraan string
+                'npwp' => 'required|string|max:15', // NPWP maksimal 15 karakter
+                'registered_date' => 'nullable|date', // Tanggal harus dalam format yang valid
+                'npwp_address' => 'required|string|max:255', // Alamat maksimal 255 karakter
+                'married_for_tax_purpose' => 'required|in:Yes,No', // Harus bernilai Yes atau No
+                'spouse_benefit' => 'required|in:Yes,No', // Harus bernilai Yes atau No
+                'number_of_dependents' => 'required|integer|min:0|max:10', // Minimal 0, maksimal 10 dependents
+                'jamsostek_id' => 'nullable|string|max:20', // Jamsostek ID maksimal 20 karakter
+                'bpjs_id' => 'required|string|max:20', // BPJS ID maksimal 20 karakter
+                'benefit_class' => 'required|integer|min:0|max:3', // Kelas manfaat harus antara 0-3
+                'dependents_count' => 'required|string|in:Use Family Info', // Harus bernilai "Use Family Info"
             ]);
             
             if ($validator->fails()) {

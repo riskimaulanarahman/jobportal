@@ -5,25 +5,31 @@
             <div class="navbar-brand-box">
                 <a href="/" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('assets/images/logo-dark-sm.png') }}" alt="" height="22">
+                        {{-- <img src="{{ URL::asset('assets/images/logo-dark-sm.png') }}" alt="" height="22"> --}}
+                        <b style="font-size: 22px;">{{ env('APP_SHORTNAME') }}</b>
+
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('assets/images/logo-dark-sm.png') }}" alt="" height="22">
+                        {{-- <img src="{{ URL::asset('assets/images/logo-dark-sm.png') }}" alt="" height="22"> --}}
+                        <b style="font-size: 22px;">{{ env('APP_NAME') }}</b>
                     </span>
                 </a>
 
                 <a href="index" class="logo logo-light">
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="22">
+                        <b style="font-size: 22px;">{{ env('APP_SHORTNAME') }}</b>
+                        {{-- <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="22"> --}}
                     </span>
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('assets/images/logo-light-sm.png') }}" alt="" height="22">
+                        {{-- <b style="font-size: 30px;">{{ env('APP_NAME') }}</b> --}}
+                        <b style="font-size: 22px;">{{ env('APP_SHORTNAME') }}</b>
+                        {{-- <img src="{{ URL::asset('assets/images/logo-light-sm.png') }}" alt="" height="22"> --}}
                     </span>
                 </a>
             </div>
 
             <button type="button" class="btn btn-sm px-3 font-size-16 header-item vertical-menu-btn topnav-hamburger">
-                <span class="hamburger-icon open">
+                <span class="hamburger-icon">
                     <span></span>
                     <span></span>
                     <span></span>

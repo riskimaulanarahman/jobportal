@@ -6,27 +6,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\Family;
+use App\Models\Language;
 
-class FamilyController extends Controller
+class LanguageController extends Controller
 {
     public function __construct()
     {
-        $this->namemodel = 'Family';
-        $this->model = new Family();
+        $this->namemodel = 'Language';
+        $this->model = new Language();
     }
 
     public function store(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
-                'members' => 'required|string|max:255', // Misalnya jumlah anggota harus angka positif
-                'name' => 'required|string|max:255', // Nama biasanya string
-                'gender' => 'required|in:M,F', // Gender bisa jadi opsi tertentu
-                'birth_place' => 'required|string|max:255', // Tempat lahir biasanya string
-                'date_of_birth' => 'required|date', // Tanggal lahir harus format tanggal
-                'country_of_birth' => 'required|string|max:255', // Negara tempat lahir string
-                'nationality' => 'required|string|max:255', // Kewarganegaraan string
+                'language' => 'required|string',
+                'read' => 'required|string',
+                'write' => 'required|string',
+                'speak' => 'required|string',
             ]);
             
             if ($validator->fails()) {
@@ -38,11 +35,13 @@ class FamilyController extends Controller
             // Ambil nilai personal_data_id dari metode
             $personalDataId = $this->getPersonaldataByid();
 
+            $param1 = $request->language;
+
             // Cek apakah sudah ada data dengan personal_data_id yang sama
-            $existingData = $this->model->where('personal_data_id', $personalDataId)->where('members',$request->members)->first();
+            $existingData = $this->model->where('personal_data_id', $personalDataId)->where('language',$param1)->first();
 
             if ($existingData) {
-                return response()->json(['error' => 'Data '.$request->members.' already exists. You can only add one row of data!']);
+                return response()->json(['error' => $param1 . ' already exists.']);
             }
 
             // Gabungkan personal_data_id ke dalam data yang dikirim
@@ -64,13 +63,10 @@ class FamilyController extends Controller
         try {
 
             $validator = Validator::make($request->all(), [
-                'members' => 'required|string|max:255', // Misalnya jumlah anggota harus angka positif
-                'name' => 'required|string|max:255', // Nama biasanya string
-                'gender' => 'required|in:M,F', // Gender bisa jadi opsi tertentu
-                'birth_place' => 'required|string|max:255', // Tempat lahir biasanya string
-                'date_of_birth' => 'required|date', // Tanggal lahir harus format tanggal
-                'country_of_birth' => 'required|string|max:255', // Negara tempat lahir string
-                'nationality' => 'required|string|max:255', // Kewarganegaraan string
+                'language' => 'required|string',
+                'read' => 'required|string',
+                'write' => 'required|string',
+                'speak' => 'required|string',
             ]);
             
             if ($validator->fails()) {

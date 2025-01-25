@@ -6,27 +6,30 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Models\Family;
+use App\Models\Experience;
 
-class FamilyController extends Controller
+class ExperienceController extends Controller
 {
     public function __construct()
     {
-        $this->namemodel = 'Family';
-        $this->model = new Family();
+        $this->namemodel = 'Experience';
+        $this->model = new Experience();
     }
 
     public function store(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
-                'members' => 'required|string|max:255', // Misalnya jumlah anggota harus angka positif
-                'name' => 'required|string|max:255', // Nama biasanya string
-                'gender' => 'required|in:M,F', // Gender bisa jadi opsi tertentu
-                'birth_place' => 'required|string|max:255', // Tempat lahir biasanya string
-                'date_of_birth' => 'required|date', // Tanggal lahir harus format tanggal
-                'country_of_birth' => 'required|string|max:255', // Negara tempat lahir string
-                'nationality' => 'required|string|max:255', // Kewarganegaraan string
+                'start_date'          => 'required|date',
+                'end_date'            => 'nullable|date|after_or_equal:start_date',
+                'company'             => 'required|string|max:255',
+                'industry_type'       => 'required|string|max:255',
+                'city_or_country'        => 'required|string|max:255',
+                'last_position_held'       => 'required|string|max:255',
+                'name_of_superior'       => 'required|string|max:255',
+                'designation_of_superior'=> 'required|string|max:255',
+                'last_drawn_salary'         => 'required|numeric|min:0',
+                'reason_for_leaving'      => 'required|string|max:1000',
             ]);
             
             if ($validator->fails()) {
@@ -37,14 +40,7 @@ class FamilyController extends Controller
 
             // Ambil nilai personal_data_id dari metode
             $personalDataId = $this->getPersonaldataByid();
-
-            // Cek apakah sudah ada data dengan personal_data_id yang sama
-            $existingData = $this->model->where('personal_data_id', $personalDataId)->where('members',$request->members)->first();
-
-            if ($existingData) {
-                return response()->json(['error' => 'Data '.$request->members.' already exists. You can only add one row of data!']);
-            }
-
+            
             // Gabungkan personal_data_id ke dalam data yang dikirim
             $data = $request->all();
             $data['personal_data_id'] = $personalDataId;
@@ -64,13 +60,16 @@ class FamilyController extends Controller
         try {
 
             $validator = Validator::make($request->all(), [
-                'members' => 'required|string|max:255', // Misalnya jumlah anggota harus angka positif
-                'name' => 'required|string|max:255', // Nama biasanya string
-                'gender' => 'required|in:M,F', // Gender bisa jadi opsi tertentu
-                'birth_place' => 'required|string|max:255', // Tempat lahir biasanya string
-                'date_of_birth' => 'required|date', // Tanggal lahir harus format tanggal
-                'country_of_birth' => 'required|string|max:255', // Negara tempat lahir string
-                'nationality' => 'required|string|max:255', // Kewarganegaraan string
+                'start_date'          => 'required|date',
+                'end_date'            => 'nullable|date|after_or_equal:start_date',
+                'company'             => 'required|string|max:255',
+                'industry_type'       => 'required|string|max:255',
+                'city_or_country'        => 'required|string|max:255',
+                'last_position_held'       => 'required|string|max:255',
+                'name_of_superior'       => 'required|string|max:255',
+                'designation_of_superior'=> 'required|string|max:255',
+                'last_drawn_salary'         => 'required|numeric|min:0',
+                'reason_for_leaving'      => 'required|string|max:1000',
             ]);
             
             if ($validator->fails()) {

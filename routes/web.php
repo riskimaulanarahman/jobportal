@@ -19,6 +19,16 @@ Route::middleware(['auth'])->group(function () {
         'social_media' => App\Http\Controllers\Module\SocialMediaController::class,
         'size' => App\Http\Controllers\Module\SizeController::class,
         'family' => App\Http\Controllers\Module\FamilyController::class,
+        'address' => App\Http\Controllers\Module\AddressController::class,
+        'communication' => App\Http\Controllers\Module\CommunicationController::class,
+        'reference' => App\Http\Controllers\Module\ReferenceController::class,
+        'education' => App\Http\Controllers\Module\EducationController::class,
+        'experience' => App\Http\Controllers\Module\ExperienceController::class,
+        'language' => App\Http\Controllers\Module\LanguageController::class,
+        'skill' => App\Http\Controllers\Module\SkillController::class,
+        'bank' => App\Http\Controllers\Module\BankController::class,
+        'tax' => App\Http\Controllers\Module\TaxController::class,
+        'document' => App\Http\Controllers\Module\DocumentController::class,
     ]);
 });
 // dashboard
