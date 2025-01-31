@@ -109,7 +109,7 @@ class HomeController extends Controller
         }
 
         // Paginate the results
-        $jobs = $query->paginate(5)->withQueryString(); // Ensure pagination retains filter parameters
+        $jobs = $query->orderBy('created_at','desc')->paginate(5)->withQueryString(); // Ensure pagination retains filter parameters
 
         // Get distinct categories and locations
         $distinctCategories = Job::distinct()->pluck('category');
