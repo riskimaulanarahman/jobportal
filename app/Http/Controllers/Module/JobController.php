@@ -6,83 +6,126 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Module\Job;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class JobController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->namemodel = 'Job';
+        $this->model = new Job();
+    }
+  
+    public function index(Request $request)
+    {
+        $query = $this->model->query();
+
+        // Filtering by keyword
+        if ($keyword = $request->get('keyword')) {
+            $query->where('job_title', 'LIKE', "%{$keyword}%")
+                ->orWhere('code_job', 'LIKE', "%{$keyword}%")
+                ->orWhere('category', 'LIKE', "%{$keyword}%")
+                ->orWhere('contract_status', 'LIKE', "%{$keyword}%")
+                ->orWhere('location', 'LIKE', "%{$keyword}%");
+        }
+
+        $data = $query->orderBy('created_at','desc')->paginate(10)->withQueryString(); // Ensure pagination retains filter parameters
+
+        // dd($data);
+        
+        return view('area.job-posting', compact([
+            'data',
+        ]));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        try {
+
+            $requestData = $request->all();
+            // Format skills_required jika berupa array
+            if (is_string($requestData['skills_required'])) {
+                $requestData['skills_required'] = array_map('trim', explode(',', $requestData['skills_required']));
+            }
+
+            $validator = Validator::make($request->all(), [
+                'job_title' => 'required|string',
+                'category' => 'required|string',
+                'contract_status' => 'required|string',
+                'location' => 'required|string',
+                'experience_years' => 'required|integer',
+                'job_description' => 'required|string',
+                'skills_required' => 'required|string',
+            ]);
+            
+            if ($validator->fails()) {
+                // Gabungkan semua pesan error menjadi satu string
+                $errors = implode('<br>', $validator->errors()->all());
+                return response()->json(['error' => $errors]);
+            }
+            
+            // Generate kode job otomatis
+            $lastJob = $this->model->latest('id')->first();
+            $nextId = $lastJob ? $lastJob->id + 1 : 1;
+            $requestData['code_job'] = 'JOB-' . str_pad($nextId, 5, '0', STR_PAD_LEFT); // Contoh: JOB-00001
+            
+            // Buat data baru
+            $this->model->create($requestData);
+
+            return response()->json(['success' => $this->namemodel.' added successfully.']);
+            
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $requestData = $request->all();
+            // Format skills_required jika berupa array
+            if (is_string($requestData['skills_required'])) {
+                $requestData['skills_required'] = array_map('trim', explode(',', $requestData['skills_required']));
+            }
+
+            $validator = Validator::make($request->all(), [
+                'job_title' => 'required|string',
+                'code_job' => 'required|string',
+                'category' => 'required|string',
+                'contract_status' => 'required|string',
+                'location' => 'required|string',
+                'experience_years' => 'required|integer',
+                'job_description' => 'required|string',
+                'skills_required' => 'required|string',
+            ]);
+            
+            if ($validator->fails()) {
+                // Gabungkan semua pesan error menjadi satu string
+                $errors = implode('<br>', $validator->errors()->all());
+                return response()->json(['error' => $errors]);
+            }
+        
+            // Proses update data
+            $data = $this->model->findOrFail($id);
+
+            $data->update($requestData);
+        
+            return response()->json(['success' => $this->namemodel.' updated successfully.']);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        try {
+            $data = $this->model->findOrFail($id);
+            $data->delete();
+            return response()->json(['success' => $this->namemodel.' deleted successfully.']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
 
     public function generateDummyData()

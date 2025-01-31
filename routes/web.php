@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
         'bank' => App\Http\Controllers\Module\BankController::class,
         'tax' => App\Http\Controllers\Module\TaxController::class,
         'document' => App\Http\Controllers\Module\DocumentController::class,
+        'job_posting' => App\Http\Controllers\Module\JobController::class,
     ]);
 });
 // dashboard

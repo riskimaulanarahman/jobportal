@@ -171,10 +171,10 @@
                         <label>BPJS ID</label>
                         <input type="text" name="bpjs_id" class="form-control" required>
                     </div>
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label>Benefit Class</label>
                         <input type="number" name="benefit_class" min="0" max="3" class="form-control" required>
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label>Dependents Count</label>
                         <input type="text" name="dependents_count" class="form-control" value="Use Family Info" readonly>

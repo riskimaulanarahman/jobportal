@@ -329,4 +329,72 @@
         return d.promise();
     
     }
+
+
+    // CRUD
+
+    function handleFormSubmission(formSelector, url, method = 'POST', overrideMethod = null) {
+        $(formSelector).on('submit', function (e) {
+            e.preventDefault();
+
+            const form = $(this);
+            const formData = new FormData(this);
+
+            const headers = {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}",
+            };
+
+            if (overrideMethod) {
+                headers['X-HTTP-METHOD-OVERRIDE'] = overrideMethod;
+            }
+
+            fetch(url, {
+                method: method,
+                headers: headers,
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire("Success", data.success, "success")
+                            .then(() => location.reload());
+                    } else {
+                        Swal.fire("Error", data.error, "error");
+                    }
+                })
+                .catch(() => Swal.fire("Error", "Something went wrong!", "error"));
+        });
+    }
+
+    function handleDeleteAction(buttonSelector, urlTemplate) {
+        $(document).on('click', buttonSelector, function () {
+            const id = $(this).data('id');
+            const url = urlTemplate.replace(':id', id);
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(url, {
+                        method: "DELETE",
+                        headers: {
+                            'X-CSRF-TOKEN': "{{ csrf_token() }}",
+                        },
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                Swal.fire("Deleted!", "Your data has been deleted.", "success")
+                                    .then(() => location.reload());
+                            }
+                        });
+                }
+            });
+        });
+    }
 </script>

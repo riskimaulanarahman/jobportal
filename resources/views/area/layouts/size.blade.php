@@ -1,7 +1,7 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h4 class="card-title">Size</h4>
+            <h4 class="card-title">Physical Measurements</h4>
             <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#createModalSize">Create</button>
         </div>
         <div class="card-body">
@@ -39,7 +39,7 @@
                                     @method('PUT')
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Edit Size</h5>
+                                            <h5 class="modal-title">Edit Physical Measurements</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
                                         <div class="modal-body">
@@ -97,7 +97,7 @@
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create Size</h5>
+                    <h5 class="modal-title">Create Physical Measurements</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">

@@ -225,16 +225,16 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label>Job Title</label>
-                        <input type="text" name="job_title" class="form-control">
+                        <label>Business Sector</label>
+                        <input type="text" name="employer_type" class="form-control" placeholder="Public Sector, Healthcare Providers, Military and Defense">
                     </div>
                     <div class="mb-3">
-                        <label>Employer</label>
+                        <label>Company</label>
                         <input type="text" name="employer" class="form-control">
                     </div>
                     <div class="mb-3">
-                        <label>Employer Type</label>
-                        <input type="text" name="employer_type" class="form-control" placeholder="Public Sector, Healthcare Providers, Military and Defense">
+                    <label>Job Title</label>
+                        <input type="text" name="job_title" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">
